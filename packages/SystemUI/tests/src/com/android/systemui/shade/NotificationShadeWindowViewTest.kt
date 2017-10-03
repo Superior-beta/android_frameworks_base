@@ -129,6 +129,7 @@ class NotificationShadeWindowViewTest : SysuiTestCase() {
     @Mock private lateinit var keyguardTransitionInteractor: KeyguardTransitionInteractor
     @Mock lateinit var primaryBouncerInteractor: PrimaryBouncerInteractor
     @Mock lateinit var alternateBouncerInteractor: AlternateBouncerInteractor
+    @Mock private lateinit var qqsGestureListener: QQSGestureListener
     @Captor
     private lateinit var interactionEventHandlerCaptor: ArgumentCaptor<InteractionEventHandler>
 
@@ -202,6 +203,7 @@ class NotificationShadeWindowViewTest : SysuiTestCase() {
                 primaryBouncerInteractor,
                 alternateBouncerInteractor,
                 mock(),
+                qqsGestureListener,
             )
 
         controller.setupExpandedStatusBar()
