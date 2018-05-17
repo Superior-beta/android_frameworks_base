@@ -104,6 +104,8 @@ public class CameraDeviceImpl extends CameraDevice
 
     private static final int REQUEST_ID_NONE = -1;
 
+    private int customOpMode = 0;
+
     /**
      * Starting {@link Build.VERSION_CODES#VANILLA_ICE_CREAM},
      * {@link #isSessionConfigurationSupported} also checks for compatibility of session parameters
@@ -493,6 +495,10 @@ public class CameraDeviceImpl extends CameraDevice
         }
     }
 
+    public void setVendorStreamConfigMode(int fpsrange) {
+        customOpMode = fpsrange;
+    }
+
     @Override
     public String getId() {
         return mCameraId;
@@ -611,6 +617,7 @@ public class CameraDeviceImpl extends CameraDevice
                         mConfiguredOutputs.put(streamId, outConfig);
                     }
                 }
+                operatingMode = (operatingMode | (customOpMode << 16));
 
                 int offlineStreamIds[];
                 if (sessionParams != null) {
