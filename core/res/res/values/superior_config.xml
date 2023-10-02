@@ -5,44 +5,48 @@
 -->
 <resources>
 
-    <!-- Paths to the libraries that contain device specific key handlers -->
-    <string-array name="config_deviceKeyHandlerLibs" translatable="false">
-    </string-array>
-    <!-- Names of the key handler classes -->
-    <string-array name="config_deviceKeyHandlerClasses" translatable="false">
-    </string-array>
+     <!-- Paths to the libraries that contain device specific key handlers -->
+     <string-array name="config_deviceKeyHandlerLibs" translatable="false">
+     </string-array>
+     <!-- Names of the key handler classes -->
+     <string-array name="config_deviceKeyHandlerClasses" translatable="false">
+     </string-array>
 
-    <!-- The list of package IDs that are allowed to use aux cameras.
+     <!-- The list of package IDs that are allowed to use aux cameras.
          NOTE: If this list is empty then all apps will be able to use aux cameras. -->
-    <string-array name="config_cameraAuxPackageAllowList" translatable="false" />
+     <string-array name="config_cameraAuxPackageAllowList" translatable="false" />
 
-    <!-- The list of package IDs that are not allowed to use aux cameras. -->
-    <string-array name="config_cameraAuxPackageExcludeList" translatable="false" />
+     <!-- The list of package IDs that are not allowed to use aux cameras. -->
+     <string-array name="config_cameraAuxPackageExcludeList" translatable="false" />
 
-    <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
-    <string-array name="config_cameraHFRPrivAppList" translatable="false" />
+     <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
+     <string-array name="config_cameraHFRPrivAppList" translatable="false" />
 
-    <!-- Whether to cleanup fingerprints upon connection to the daemon and when
+     <!-- Whether to cleanup fingerprints upon connection to the daemon and when
          user switches -->
-    <bool name="config_cleanupUnusedFingerprints">true</bool>
+     <bool name="config_cleanupUnusedFingerprints">true</bool>
 
-    <!-- Should we listen for fingerprints when the screen is off?  Devices
+     <!-- Should we listen for fingerprints when the screen is off?  Devices
          with a rear-mounted sensor want this, but certain devices have
          the sensor embedded in the power key and listening all the time
          causes a poor experience. -->
-    <bool name="config_fingerprintWakeAndUnlock">true</bool>
+     <bool name="config_fingerprintWakeAndUnlock">true</bool>
 
-    <!-- Build properties from a GMS certified device against current platform SPL level -->
-    <string-array name="config_certifiedBuildProperties" translatable="false">
-        <item>PRODUCT:tokay_beta</item>
-        <item>DEVICE:tokay</item>
-        <item>MANUFACTURER:Google</item>
-        <item>BRAND:google</item>
-        <item>MODEL:Pixel 9</item>
-        <item>FINGERPRINT:google/tokay_beta/tokay:15/AP41.240823.009/12329489:user/release-keys</item>
-        <item>VERSION.SECURITY_PATCH:2024-09-05</item>
-    </string-array>
+     <!-- Build properties from a GMS certified device against current platform SPL level -->
+     <string-array name="config_certifiedBuildProperties" translatable="false">
+          <item>PRODUCT:tokay_beta</item>
+          <item>DEVICE:tokay</item>
+          <item>MANUFACTURER:Google</item>
+          <item>BRAND:google</item>
+          <item>MODEL:Pixel 9</item>
+          <item>FINGERPRINT:google/tokay_beta/tokay:15/AP41.240823.009/12329489:user/release-keys</item>
+          <item>VERSION.SECURITY_PATCH:2024-09-05</item>
+     </string-array>
 
-    <!-- Build fingerprint from stock ROM -->
-    <string name="config_stockFingerprint" translatable="false"></string>
+     <!-- Build fingerprint from stock ROM -->
+     <string name="config_stockFingerprint" translatable="false"></string>
+
+     <!-- Default values for status bar DT2S gesture -->
+     <bool name="config_dt2sGestureAvailable">true</bool>
+     <bool name="config_dt2sGestureEnabledByDefault">true</bool>
 </resources>
