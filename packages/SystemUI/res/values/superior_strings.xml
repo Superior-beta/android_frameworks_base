@@ -9,4 +9,7 @@
     <string name="drag_or_tap_to_add_tiles">Hold &amp; drag or tap to add tiles</string>
     <!-- Label for the area where tiles can be dragged in to remove -->
     <string name="drag_or_tap_to_remove_tiles">Hold &amp; drag or tap to remove tiles</string>
+
+    <!-- Text while recognizing face -->
+    <string name="face_unlock_recognizing">Recognizing face...</string>
 </resources>
