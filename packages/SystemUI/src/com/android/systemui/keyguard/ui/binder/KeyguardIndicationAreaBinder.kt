@@ -64,6 +64,8 @@ object KeyguardIndicationAreaBinder {
             previous?.let { indicationController.indicationArea = it }
         }
 
+        indicationController.setIndicationAreaTop(view)
+
         val indicationText: TextView = view.requireViewById(R.id.keyguard_indication_text)
         val indicationTextBottom: TextView =
             view.requireViewById(R.id.keyguard_indication_text_bottom)
