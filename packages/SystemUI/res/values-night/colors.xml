@@ -116,4 +116,7 @@
     <color name="global_actions_lite_text">@*android:color/foreground_device_default_dark</color>
     <color name="global_actions_lite_emergency_background">@*android:color/surface_dark</color>
     <color name="global_actions_lite_emergency_icon">@*android:color/accent_device_default_dark</color>
+
+    <!-- QS Surface Color -->
+    <color name="qs_surface_color">@*android:color/system_neutral1_900</color>
 </resources>
