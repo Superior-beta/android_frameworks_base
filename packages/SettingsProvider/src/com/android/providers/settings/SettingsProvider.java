@@ -1972,7 +1972,7 @@ public class SettingsProvider extends ContentProvider {
 
         File cacheFile = getCacheFile(name, callingUserId);
         if (cacheFile != null) {
-            if (!isValidAudioUri(name, value)) {
+            if (!isValidMediaUri(name, value)) {
                 return false;
             }
             // Invalidate any relevant cache files
