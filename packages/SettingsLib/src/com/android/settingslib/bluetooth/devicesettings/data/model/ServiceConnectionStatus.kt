@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.android.systemui.scene.ui.composable
+package com.android.settingslib.bluetooth.devicesettings.data.model
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.android.compose.animation.scene.SceneScope
-import com.android.systemui.scene.shared.model.Scene
+import android.os.IInterface
 
-/** Compose-capable extension of [Scene]. */
-interface ComposableScene : Scene {
-    @Composable fun SceneScope.Content(modifier: Modifier)
+/** Present a service connection status. */
+sealed interface ServiceConnectionStatus<out T : IInterface> {
+    /** Service is connecting. */
+    data object Connecting : ServiceConnectionStatus<Nothing>
+
+    /** Service is connected. */
+    data class Connected<T : IInterface>(val service: T) : ServiceConnectionStatus<T>
+
+    /** Service connection failed. */
+    data object Failed : ServiceConnectionStatus<Nothing>
 }

@@ -14,14 +14,6 @@
  * limitations under the License.
  */
 
-package com.android.systemui.shade.shared.model
+package com.android.settingslib.bluetooth.devicesettings;
 
-/** Enumerates all supported alignments of the shade. */
-sealed interface ShadeAlignment {
-
-    /** Aligns the shade to the top. */
-    data object Top : ShadeAlignment
-
-    /** Aligns the shade to the bottom. */
-    data object Bottom : ShadeAlignment
-}
+parcelable DeviceSettingsProviderServiceStatus;
