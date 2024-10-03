@@ -919,6 +919,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
         } else {
             if (view != null) {
                 UdfpsView udfpsView = (UdfpsView) view;
+                cancelAodSendFingerUpAction();
                 if (udfpsView.isDisplayConfigured()) {
                     udfpsView.unconfigureDisplay();
                 }
@@ -1094,6 +1095,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
             return;
         }
         if (isOptical()) {
+            onAodInterrupt((int) x, (int) y, major, minor);
             mLatencyTracker.onActionStart(ACTION_UDFPS_ILLUMINATE);
         }
         // Refresh screen timeout and boost process priority if possible.
