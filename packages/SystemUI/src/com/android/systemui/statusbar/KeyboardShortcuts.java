@@ -376,36 +376,27 @@ public final class KeyboardShortcuts {
     @VisibleForTesting
     void showKeyboardShortcuts(int deviceId) {
         retrieveKeyCharacterMap(deviceId);
-        mReceivedAppShortcutGroups = null;
-        mReceivedImeShortcutGroups = null;
-        mWindowManager.requestAppKeyboardShortcuts(
-                result -> {
-                    mReceivedAppShortcutGroups = result;
-                    maybeMergeAndShowKeyboardShortcuts();
-                }, deviceId);
-        mWindowManager.requestImeKeyboardShortcuts(
-                result -> {
-                    mReceivedImeShortcutGroups = result;
-                    maybeMergeAndShowKeyboardShortcuts();
-                }, deviceId);
+        mWindowManager.requestAppKeyboardShortcuts(new KeyboardShortcutsReceiver() {
+            @Override
+            public void onKeyboardShortcutsReceived(
+                    final List<KeyboardShortcutGroup> result) {
+                sanitiseShortcuts(result);
+                result.add(getSystemShortcuts());
+                final KeyboardShortcutGroup appShortcuts = getDefaultApplicationShortcuts();
+                if (appShortcuts != null) {
+                    result.add(appShortcuts);
+                }
+                showKeyboardShortcutsDialog(result);
+            }
+        }, deviceId);
     }
 
-    private void maybeMergeAndShowKeyboardShortcuts() {
-        if (mReceivedAppShortcutGroups == null || mReceivedImeShortcutGroups == null) {
-            return;
+    static void sanitiseShortcuts(List<KeyboardShortcutGroup> shortcutGroups) {
+        for (KeyboardShortcutGroup group : shortcutGroups) {
+            for (KeyboardShortcutInfo info : group.getItems()) {
+                info.clearIcon();
+            }
         }
-        List<KeyboardShortcutGroup> shortcutGroups = mReceivedAppShortcutGroups;
-        shortcutGroups.addAll(mReceivedImeShortcutGroups);
-        mReceivedAppShortcutGroups = null;
-        mReceivedImeShortcutGroups = null;
-
-        final KeyboardShortcutGroup defaultAppShortcuts =
-                getDefaultApplicationShortcuts();
-        if (defaultAppShortcuts != null) {
-            shortcutGroups.add(defaultAppShortcuts);
-        }
-        shortcutGroups.add(getSystemShortcuts());
-        showKeyboardShortcutsDialog(shortcutGroups);
     }
 
     private void dismissKeyboardShortcuts() {

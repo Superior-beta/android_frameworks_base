@@ -412,21 +412,23 @@ public final class KeyboardShortcutListSearch {
     @VisibleForTesting
     void showKeyboardShortcuts(int deviceId) {
         retrieveKeyCharacterMap(deviceId);
-        mAppShortcutsReceived = false;
-        mImeShortcutsReceived = false;
-        mWindowManager.requestAppKeyboardShortcuts(result -> {
-            // Add specific app shortcuts
-            if (result.isEmpty()) {
-                mCurrentAppPackageName = null;
-                mKeySearchResultMap.put(SHORTCUT_SPECIFICAPP_INDEX, false);
-            } else {
-                mCurrentAppPackageName = result.get(0).getPackageName();
-                mSpecificAppGroup.addAll(reMapToKeyboardShortcutMultiMappingGroup(result));
-                mKeySearchResultMap.put(SHORTCUT_SPECIFICAPP_INDEX, true);
-            }
-            mAppShortcutsReceived = true;
-            if (mImeShortcutsReceived) {
-                mergeAndShowKeyboardShortcutsGroups();
+        mWindowManager.requestAppKeyboardShortcuts(new KeyboardShortcutsReceiver() {
+            @Override
+            public void onKeyboardShortcutsReceived(
+                    final List<KeyboardShortcutGroup> result) {
+                // Add specific app shortcuts
+                if (result.isEmpty()) {
+                    mKeySearchResultMap.put(SHORTCUT_SPECIFICAPP_INDEX, false);
+                } else {
+                    KeyboardShortcuts.sanitiseShortcuts(result);
+                    mSpecificAppGroup = reMapToKeyboardShortcutMultiMappingGroup(result);
+                    mKeySearchResultMap.put(SHORTCUT_SPECIFICAPP_INDEX, true);
+                }
+                mFullShortsGroup.add(SHORTCUT_SYSTEM_INDEX, mSystemGroup);
+                mFullShortsGroup.add(SHORTCUT_INPUT_INDEX, mInputGroup);
+                mFullShortsGroup.add(SHORTCUT_OPENAPPS_INDEX, mOpenAppsGroup);
+                mFullShortsGroup.add(SHORTCUT_SPECIFICAPP_INDEX, mSpecificAppGroup);
+                showKeyboardShortcutSearchList(mFullShortsGroup);
             }
         }, deviceId);
         mWindowManager.requestImeKeyboardShortcuts(result -> {
