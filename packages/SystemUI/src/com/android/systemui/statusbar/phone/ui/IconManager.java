@@ -185,7 +185,7 @@ public class IconManager implements DemoModeCommandReceiver {
 
     protected NetworkTrafficSB addNetworkTraffic(int index, String slot) {
         NetworkTrafficSB view = onCreateNetworkTraffic(slot);
-        mGroup.addView(view, index, onCreateLayoutParams());
+        mGroup.addView(view, index, onCreateLayoutParams(Shape.WRAP_CONTENT));
         return view;
     }
     
