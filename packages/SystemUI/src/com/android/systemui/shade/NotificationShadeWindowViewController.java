@@ -420,6 +420,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
                 // otherwise lockscreen DT2S and AOD DT2W will conflict.
                 if (mStatusBarStateController.isDozing()) {
                     mPulsingWakeupGestureHandler.onTouchEvent(ev);
+                    }
                 }
 
                 if (!SceneContainerFlag.isEnabled()
